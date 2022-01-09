@@ -1,5 +1,6 @@
 package com.xxxx.server.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xxxx.server.config.security.JwtTokenUtil;
 import com.xxxx.server.pojo.Admin;
 import com.xxxx.server.mapper.AdminMapper;
@@ -35,6 +36,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AdminMapper adminMapper;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -75,5 +79,17 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return RespBean.success("登录成功", tokenMap);
+    }
+
+    /**
+     * 根据用户名获取用户
+     * @param username
+     * @return
+     */
+    @Override
+    public Admin getAdminByUsername(String username) {
+        // mybatis-plus功能 不用写sql语句
+        return adminMapper.selectOne(new QueryWrapper<Admin>().eq("username", username)
+                .eq("enabled", true));
     }
 }
