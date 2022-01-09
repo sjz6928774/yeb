@@ -47,7 +47,7 @@ public class JwtAuthenzationTokenFilter extends OncePerRequestFilter {
                 // 让他登录 SecurityConfig中重写了userDetailsService
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 // 验证token是否有效，重新设置用户对象
-                if (jwtTokenUtil.validateToken(tokenHead, userDetails)) {
+                if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                     // 重新设置用户对象
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(userDetails, null,

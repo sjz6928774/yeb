@@ -24,7 +24,7 @@ public class RestAuthoricationEntryPoint implements AuthenticationEntryPoint {
         // 设置json类型
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
-        RespBean bean = RespBean.error("权限不足，请连接管理员");
+        RespBean bean = RespBean.error("尚未登录，请登录！");
         bean.setCode(401);
         out.write(new ObjectMapper().writeValueAsString(bean));
         out.flush();

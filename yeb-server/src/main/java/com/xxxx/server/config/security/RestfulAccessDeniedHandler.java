@@ -22,7 +22,7 @@ public class RestfulAccessDeniedHandler implements AccessDeniedHandler {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
-        RespBean bean = RespBean.error("尚未登录，请登录！");
+        RespBean bean = RespBean.error("权限不足，请连接管理员");
         bean.setCode(403);
         out.write(new ObjectMapper().writeValueAsString(bean));
         out.flush();

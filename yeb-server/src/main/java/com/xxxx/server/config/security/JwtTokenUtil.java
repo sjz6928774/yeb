@@ -147,7 +147,7 @@ public class JwtTokenUtil {
                 // 失效时间
                 .setExpiration(generateExpirationDate())
                 // 签名 密钥
-                .signWith(SignatureAlgorithm.ES512, secret)
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
 
