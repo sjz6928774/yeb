@@ -12,9 +12,9 @@ import java.util.List;
 public class CodeGenerator {
     public static void main(String[] args) {
         FastAutoGenerator.create(
-                "jdbc:mariadb://localhost:3306/yeb?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC",
+                "jdbc:mysql://localhost:3306/yeb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8",
                 "root",
-                "sd3056665")
+                "root")
                 // 全局配置
                 .globalConfig((scanner, builder) ->{
                         builder.author(scanner.apply("请输入作者名称？")).fileOverride();

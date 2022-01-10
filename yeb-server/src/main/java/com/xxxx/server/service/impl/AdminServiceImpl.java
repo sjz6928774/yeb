@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -54,7 +55,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * @return
      */
     @Override
-    public RespBean login(String username, String password, HttpServletRequest request) {
+    public RespBean login(String username, String password, String code, HttpServletRequest request) {
+        String kaptcha = (String) request.getSession().getAttribute("kaptcha");
+        // code为空，或者session中的验证码与前端传过来的不一致时，异常系
+        if (StringUtils.isEmpty(code) || !kaptcha.equalsIgnoreCase(code)) {
+            return RespBean.error("验证码输入错误，请重新输入！");
+        }
         // 登录
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         // 如果userDetails是空 或者 密码匹配失败 => 用户名或密码有问题
@@ -83,6 +89,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     /**
      * 根据用户名获取用户
+     *
      * @param username
      * @return
      */

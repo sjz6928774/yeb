@@ -5,10 +5,10 @@ server:
 spring:
   # 数据源配置
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/yeb?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yeb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: root
-    password: sd3056665
+    password: root
     hikari:
       # 连接池名
       pool-name: DateHikariCP
